@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { User, Post} = require('../models');
-const withAuth = require('../utils/auth');
-const sequelize = require('../config/connection');
 
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
+            attributes: [
+                'title',
+                'words',
+            ],
             include: [
             {
                 model:User,
@@ -13,9 +15,9 @@ router.get('/', async (req, res) => {
             },
             ],
         });
-    const posts = postData.map((post) => post.get({plain: true}));
+    const posts = postData.map((post) => post.get({ plain: true}));
     
-    res.render('dashboard', {
+    res.render('homepage', {
         posts,
         logged_in: req.session.logged_in
     });
@@ -26,7 +28,11 @@ router.get('/', async (req, res) => {
 
 
 router.get('/login', async (req,res) => {
-res.render('login');
+    if (req.session.cookie.logged_in){
+        res.redirect('/');
+        return;
+    }
+    res.render('login');
 });
 
 router.get('/signup', (req,res) => {
