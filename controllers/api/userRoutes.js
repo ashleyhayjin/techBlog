@@ -1,27 +1,16 @@
 const router = require('express').Router();
-const { User, Post } = require('../../models');
-const sequelize = require('../../config/connection');
+const { User } = require('../../models');
 
-router.get('/', (req, res) => {
-  // Access our User model and run .findAll() method
-  User.findAll({
-      attributes: { exclude: ['password'] }
-  })
-    .then(dbUserData => res.json(dbUserData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
 
 router.post('/', async (req,res) => {
     console.log('====================');
+    console.log(req.body);
     try {
         const userData = await User.create(req.body);
       
         req.session.save(() => {
           req.session.user_id = userData.id;
-          req.session.logged_in = true;
+          req.session.loggedIn = true;
     
           res.status(200).json(userData);
         });
