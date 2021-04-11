@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
-require('dotenv').config;
+require('dotenv').config();
 
 // called sequelize globally so it can be used in the if/else statement. 
 
 let sequelize;
+console.log(process.env)
 
 if(process.env.JAWSDB_URL){
     sequelize = new Sequelize(process.env.JAWSDB_URL);
