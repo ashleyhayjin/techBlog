@@ -1,4 +1,4 @@
-const loginEvent = async (event) => {
+const loginFormHandler = async (event) => {
     event.preventDefault();
 
     const username = document.querySelector("#username-login").value.trim();
@@ -7,15 +7,19 @@ const loginEvent = async (event) => {
     if (username && password){
         const response = await fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({ username, password}),
+            body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },
         });
-    } else {
+        if (response.ok) {
+            // If successful, redirect the browser to the profile page
+            document.location.replace('/');
+        }
+     else {
         alert('error!')
     }
-
+    }
 };
 
 document
-    .querySelector('#submit-login')
-    .addEventListener('submit', loginEvent);
+  .querySelector('.login-form')
+  .addEventListener('submit', loginFormHandler);

@@ -11,9 +11,9 @@ const newSignup = async (event) => {
             headers: {'Content-Type': 'application/json'},
         });
         
-        if (response.status === 400){
-            console.log(response);
+        if (response.ok){
             console.log('it works')
+            document.location.replace('/');
         } else {
             alert(response.statusText)
         }
