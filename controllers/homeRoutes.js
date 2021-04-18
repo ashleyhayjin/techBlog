@@ -27,8 +27,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/newPost', (req,res) => {
+    console.log("req.session:", req.session);
+    if(req.session.loggedIn){
+      res.render('newPost',{
+        loggedIn: true,
+        username: req.session.username,
+      });
+    }
+});
 
 router.get('/login', async (req,res) => {
+    console.log('req.session: ', req.session);
     if (req.session.loggedIn){
         res.redirect('/');
         return;

@@ -3,7 +3,8 @@ const loginFormHandler = async (event) => {
 
     const username = document.querySelector("#username-login").value.trim();
     const password = document.querySelector("#password-login").value.trim();
-
+    console.log(username);
+    console.log(password);
     if (username && password){
         const response = await fetch('/api/users/login', {
             method: 'POST',
@@ -13,13 +14,12 @@ const loginFormHandler = async (event) => {
         if (response.ok) {
             // If successful, redirect the browser to the profile page
             document.location.replace('/');
-        }
-     else {
+        } else {
         alert('error!')
-    }
+        }
     }
 };
 
 document
-  .querySelector('.login-form')
+  .querySelector('#login-form')
   .addEventListener('submit', loginFormHandler);

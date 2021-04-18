@@ -1,16 +1,16 @@
 [
     {
-      "title": "Music Near Me",
-      "words": "A mobile app that will send you notifications whenever a concert is playing in your area."
+      "title": "My Favorite Thing to Do",
+      "words": "I really enjoy running"
     },
     {
-      "title": "The Ultimate Tech Quiz",
-      "words": "A web app that will give users 10 new technical questions each day and track their progress in things like programming, cybersecurity, database architecture, and more!"
+      "title": "A thought Part 1",
+      "words": "It's good to spend time thinking."
 
     },
     {
-      "title": "Roll 'Em Up",
-      "words": "A game for Windows and macOS where players move a ball through a series of increasingly challenging mazes."
+      "title": "A thought Part 2",
+      "words": "It's good to build good habits."
     }
   ]
   
