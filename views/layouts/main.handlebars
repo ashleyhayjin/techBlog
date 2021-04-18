@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link  rel="stylesheet" href="css/styles.css">
 </head>
 <body>
      <header>
@@ -13,12 +14,14 @@
   <nav>
     <a href="/">Home</a>
     {{#if loggedIn}}
-    <a href="/newPost">Add a New Post</a>
     <!-- If the user is logged in, show a logout button -->
-    <a href="/logout">Logout</a>
+    <a href="/" id="logout">Logout</a>
     {{else}}
     <!-- Otherwise, show a link to login -->
     <a href="/login">Login</a>
+    {{/if}}
+    {{#if loggedIn}}
+        <button type="submit" class="btn"><a class ="link" style="color: #065b83" href="/newPost">New Post</a></button>
     {{/if}}
   </nav>
   <main>

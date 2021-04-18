@@ -3,12 +3,12 @@
     <h2 style="color:#065b83">Hey, {{username}}!</h2>
   </div>
   <form class="card-body" id="new-post">
-    <label for="post-title" class="form-label" style="color:#065b83">Create a New Post:</label>
+    <label for="post-title" class="form-label" style="color:#065b83">Title</label>
     <input class="post-title" type="text" id="post-title" name="post-content"/>
-    <label for="post-content" class="form-label" style="color:#065b83"></label>
-    <input class="post-input" type="text" id="post-content" name="post-content"/>
-    <button type="submit" class="btn btn-primary">Create</button>
-    </div>
+    <label for="post-content" class="form-label content-label" style="color:#065b83"></label>
+    <input class="post-input content-label" size="120" min="10" max="150" type="text" id="post-content" name="post-content"/>
+    <button type="submit" class="button-for-create">Submit</button>
   </form>
+     </div>
 </div>
 <script src="/js/newPost.js"></script>

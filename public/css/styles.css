@@ -1,0 +1,15 @@
+#new-post {
+    text-align: center;
+}
+
+.content-label {
+    margin: 10px;
+    padding: 50px;
+}
+
+#post-title{
+    margin-left: 20px;
+}
+.button-for-create {
+    margin-left: 50px;
+}
