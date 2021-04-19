@@ -12,20 +12,26 @@ router.get('/', async (req, res) => {
             {
                 model:User,
                 attributes: ['username'],
+            },
+            {
+                model: Comment,
+                attributes: ['comment_words'],
             }
             ],
         });
-   
         const posts = postData.map((post) => post.get({ plain: true}));
     
     res.render('homepage', {
         posts,
         loggedIn: req.session.loggedIn
     });
+    
     } catch (err) {
         res.status(500).json(err)
     }
 });
+
+
 
 router.get('/newPost', (req,res) => {
     console.log("req.session:", req.session);

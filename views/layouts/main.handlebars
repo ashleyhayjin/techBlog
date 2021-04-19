@@ -16,12 +16,10 @@
     {{#if loggedIn}}
     <!-- If the user is logged in, show a logout button -->
     <a href="/" id="logout">Logout</a>
+    <a href="/dashboard" id="dashboard">Dashboard</a>
     {{else}}
     <!-- Otherwise, show a link to login -->
     <a href="/login">Login</a>
-    {{/if}}
-    {{#if loggedIn}}
-        <button type="submit" class="btn"><a class ="link" style="color: #065b83" href="/newPost">New Post</a></button>
     {{/if}}
   </nav>
   <main>
