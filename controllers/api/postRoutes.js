@@ -18,6 +18,38 @@ router.post('/', async (req,res ) => {
   }
 })
 
+
+router.get('/', async (req, res) => {
+  try { 
+    const postData = await Post.findAll({
+      attributes: [
+        'id',
+        'title',
+        'created_at',
+        'words'
+      ],
+      include: [
+          {
+            model: User,
+            attributes: ['username']
+          },
+          {
+            model: Comment,
+            attributes: ['id', 'comment_words', 'post_id', 'user_id', 'created_at'],
+            include: {
+              model: User,
+              attributes: ['username']
+            }
+          },
+        ]
+    });
+    const post = postData.map((post) => post.get({ plain:true}));
+
+  } catch(err){
+    res.status(500).json(err);
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try { 
     const postData = await Post.findOne({
@@ -45,11 +77,11 @@ router.get('/:id', async (req, res) => {
           },
         ]
     });
-    const singlePosts = postData.map((singlePost) => singlePost.get({ plain:true}));
+    const post = postData.map((post) => post.get({ plain:true}));
 
-    res.render('single-post' , {
-      singlePosts,
-    }); 
+    // res.render('single-post' , {
+    //   posts,
+    // }); 
   } catch(err){
     res.status(500).json(err);
   }

@@ -1,13 +1,15 @@
-const newPostEvent = async (event) => {
+const commentFormHandler = async (event) => {
 
-    const title = document.querySelector("#post-title").value.trim();
-    const words = document.querySelector("#post-content").value.trim();
-    console.log(title);
-    console.log(words);
-    if (title && words){
+    const comment_words = document.querySelector("#post-title").value.trim();
+
+    const post_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+      ];
+
+    if (comment_words){
         const response = await fetch('/api/posts', {
             method: 'POST',
-            body: JSON.stringify({ title, words }),
+            body: JSON.stringify({ comment_words, post_id }),
             headers: { 'Content-Type' : 'application/json'},
         });
 
@@ -22,5 +24,5 @@ const newPostEvent = async (event) => {
 };
 
 document
-    .querySelector('#new-post')
-    .addEventListener('submit', newPostEvent);
+    .querySelector('.comment-form')
+    .addEventListener('submit', commentFormHandler);

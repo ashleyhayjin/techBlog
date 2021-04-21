@@ -31,10 +31,10 @@ router.get('/', withAuth, async (req,res) => {
             ],
         });
         
-        const postInfos = postData.map((postInfo) => postInfo.get({ plain: true}));
-        console.log(postInfos)
+        const posts = postData.map((post) => post.get({ plain: true}));
+        console.log(posts)
         res.render('dashboard', {
-            postInfos,
+            posts,
             loggedIn: true,
         }); 
     } catch(err){

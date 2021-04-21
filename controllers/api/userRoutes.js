@@ -1,5 +1,44 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post, Comment } = require('../../models');
+
+router.get('/', async (req,res) => {
+ try { 
+  const userData =  User.findAll({
+      attributes: { exclude: ["password"]}
+    });
+    const users = userData.map((user) => user.get({ plain:true}));
+  } catch (err){
+    res.status(400).json(err);
+  }
+})
+
+router.get('/:id', async (req,res) => {
+  try { 
+   const userData =  User.findOne({
+       attributes: { exclude: ["password"]},
+       where: {
+         id: req.params.id,
+       }, 
+       include: [
+         {
+           model:Post,
+           attributes: ["id", "title", "created_at", "words"]
+         }, 
+         {
+           model: Comment,
+           attributes: ["id", "comment_words", "created_at"],
+           include: {
+             model: Post,
+             attributes: ["title"]             
+           }
+         }
+       ]
+     });
+     const users = userData.map((user) => user.get({ plain:true}));
+   } catch (err){
+     res.status(400).json(err);
+   }
+ })
 
 
 router.post('/', async (req, res) => {
@@ -64,5 +103,6 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
 
 module.exports = router;
