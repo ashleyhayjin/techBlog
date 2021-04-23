@@ -1,6 +1,6 @@
 const router = require('express').Router();
+const sequelize = require('../config/connection');
 const { User, Post, Comment} = require('../models');
-const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
             attributes: [
                 'title',
                 'words',
+                "id",
             ],
             include: [
             {
@@ -16,7 +17,7 @@ router.get('/', async (req, res) => {
             },
             {
                 model: Comment,
-                attributes: ['comment_words'],
+                attributes: ['comment_words', 'id', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model:User,
                     attributes: ["username"]
@@ -25,7 +26,7 @@ router.get('/', async (req, res) => {
             ],
         });
         const posts = postData.map((post) => post.get({ plain: true}));
-    
+        console.log("Posts for Homepage:" ,posts)
     res.render('homepage', {
         posts,
         loggedIn: req.session.loggedIn
@@ -63,11 +64,13 @@ router.get('/signup', (req,res) => {
 
 router.get('/post/:id', async (req, res) => {
     try {
+        console.log(req.params.id)
         const postData = await Post.findOne({
             where:{
                 id: req.params.id
             },
             attributes: [
+                'id',
                 'title',
                 'words',
             ],
@@ -78,7 +81,7 @@ router.get('/post/:id', async (req, res) => {
             },
             {
                 model: Comment,
-                attributes: ['comment_words'],
+                attributes: ['comment_words', 'user_id', 'post_id', 'created_at'],
                 include: {
                     model:User,
                     attributes: ["username"]
@@ -87,7 +90,7 @@ router.get('/post/:id', async (req, res) => {
             ],
         });
         const posts = postData.map((post) => post.get({ plain: true}));
-    
+        console.log("Post for Individual:", posts)
     res.render('single-post', {
         posts,
         loggedIn: req.session.loggedIn

@@ -1,0 +1,24 @@
+{{#each posts as |post| }}
+   <div post-id="{{post.id}}" class="card-content">
+            {{post.words}}
+            <div>
+                <b>{{user.username}}</b>
+                {{post.created_at}}<a href="/post/{{post.id}}">{{comments.length}}</a>
+            </div>
+    </div>
+{{/each}}   
+{{#if loggedIn}}
+<form id="comment-form">
+
+    <textarea id="comment-form-body"name="comment-body"></textarea>
+
+    <button id="button">add comment</button>
+  
+</form>
+{{/if}}
+
+{{>comments comments}}
+
+{{#if loggedIn}}
+<script src="/js/comment.js"></script>
+{{/if}}

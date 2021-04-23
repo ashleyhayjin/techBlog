@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment} = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req,res) => {
+router.get('/',  async (req,res) => {
    
     try{
         const postData = await Post.findAll({
@@ -32,11 +32,13 @@ router.get('/', withAuth, async (req,res) => {
         });
         
         const posts = postData.map((post) => post.get({ plain: true}));
-        console.log(posts)
-        res.render('dashboard', {
+        console.log("posts:", posts)
+        res.render('allPost', {
+            layout : "dashboard",
             posts,
             loggedIn: true,
         }); 
+
     } catch(err){
         res.status(500).json(err)
     }
