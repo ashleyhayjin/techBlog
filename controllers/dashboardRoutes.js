@@ -70,17 +70,18 @@ router.get("/edit/:id", async (req,res) => {
             } 
         ],
        });
-       console.log("data:", postData);
-       const posts = postData.map((post) => post.get({ plain: true}));
-       res.render('edit-post', {
-           layout : "dashboard",
-           posts,
-           loggedIn: true,
-       }); 
+        const posts = postData.get({ plain: true});
+        console.log("posts: ", posts);
 
-    } catch(err){
-        res.status(500).json(err)
-    }
+        res.render('edit-post', {
+            layout : "dashboard",
+            loggedIn: true,
+            posts,
+        }); 
+        // res.status(200).json({message: "Succesfully edited post"});
+        } catch(err){
+            res.status(404).json({message: "No post found with this id"})
+        }
 });
 
 
