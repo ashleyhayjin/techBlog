@@ -23,13 +23,14 @@
     {{/if}}
   </nav>
   <main>
+  {{#if loggedIn}}
+    <a href="/newPost"><button>New Post</button></a>
+  {{/if}}
     <div>
       {{{body}}}
     </div>
   </main>
-  {{#if loggedIn}}
-    <a href="/newPost"><button>New Post</button></a>
-  {{/if}}
+
   <!-- If the user is logged in, load the JS script for when they logout -->
   {{#if loggedIn}}
   <script src="/js/logout.js"></script>
