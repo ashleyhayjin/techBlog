@@ -2,7 +2,9 @@ const commentFormHandler = async (event) => {
     event.preventDefault();
 
     const comment_words = document.querySelector("#comment-form-body").value.trim();
-    const post_id = event.target.parentNode.previousElementSibling.getAttribute("post-id");
+    const post_id = window.location.toString().split('/')[
+        window.location.toString().split('/').length - 1
+      ];
     console.log(post_id);
     console.log(comment_words);
     if (comment_words){
@@ -21,5 +23,5 @@ const commentFormHandler = async (event) => {
 };
 
 document
-  .querySelector('#button')
-  .addEventListener('click', commentFormHandler);
+  .querySelector('.comment-form')
+  .addEventListener('submit', commentFormHandler);

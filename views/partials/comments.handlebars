@@ -1,5 +1,7 @@
-{{#each comments }}
-<div>
-    <p>{{comment_words}}</p>
-</div>
-{{/each}}
+
+
+<form class="comment-form">
+    <textarea class="ml-5" id="comment-form-body" name="comment-body"></textarea>
+    <button class="button is-warning ml-5 mb-5" type="submit">add comment</button>
+</form>
+<script src="/js/comment.js"></script>
