@@ -7,6 +7,7 @@
 {{#if post.comments.length}}
 {{#each post.comments as |comment| }}
 
-<p>{{comment.comment_words}}</p>
+<p>Comment By: {{comment.user.username}}</p>
+    <p>{{comment.comment_words}}</p>
 {{/each}}
 {{/if}}

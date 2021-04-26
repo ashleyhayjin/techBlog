@@ -12,8 +12,7 @@ const newSignup = async (event) => {
         });
         
         if (response.ok){
-            console.log('it works')
-            document.location.replace('/');
+            document.location.replace('/dashboard');
         } else {
             alert(response.statusText)
         }

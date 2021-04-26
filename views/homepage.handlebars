@@ -1,11 +1,11 @@
 {{#each posts as |post| }}
 
-<div class="row mb-4 project">
+<div class="row mb-4 card project">
   <div class="col-md-5 card">
     <h2>
       <a href="/posts/{{post.id}}">{{post.title}}</a>
     </h2>
-    <p>Created by {{user.username}} </p>
+    <h3>Post by: {{user.username}} </h3>
   </div>
   <div class="col-md-7">
     <p>
@@ -13,4 +13,8 @@
     </p>
   </div>
 </div>
+    <h4>Comments: </h4>
+    {{#each post.comments as |comment| }}
+    <p>{{comment.user.username}}: {{comment.comment_words}}</p>
+    {{/each}}
 {{/each}}

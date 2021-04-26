@@ -4,9 +4,7 @@ const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
 
 router.get('/',  async (req,res) => {
-   
     try{
-        console.log(req.session);
         const postData = await Post.findAll({
             where: {
                 user_id: req.session.user_id
