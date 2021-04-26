@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const { User, Post, Comment} = require('../models');
+const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
 
 router.get('/',  async (req,res) => {
    
     try{
+        console.log(req.session);
         const postData = await Post.findAll({
             where: {
                 user_id: req.session.user_id
@@ -32,7 +34,6 @@ router.get('/',  async (req,res) => {
         });
         
         const posts = postData.map((post) => post.get({ plain: true}));
-        console.log("posts:", posts)
         res.render('allPost', {
             layout : "dashboard",
             posts,

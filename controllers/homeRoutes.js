@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Post, Comment} = require('../models');
+const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
@@ -39,12 +40,12 @@ router.get('/', async (req, res) => {
 
 
 
-router.get('/newPost', (req,res) => {
+router.get('/newPost', withAuth, (req,res) => {
     console.log("req.session:", req.session);
     if(req.session.loggedIn){
       res.render('newPost',{
         loggedIn: true,
-        username: req.session.username,
+        username: req.session.username
       });
     }
 });
@@ -62,18 +63,10 @@ router.get('/signup', (req,res) => {
     res.render('signup');
 })
 
-router.get('/post/:id', async (req, res) => {
+router.get('/posts/:id', async (req, res) => {
     try {
         console.log(req.params.id)
-        const postData = await Post.findOne({
-            where:{
-                id: req.params.id
-            },
-            attributes: [
-                'id',
-                'title',
-                'words',
-            ],
+        const postData = await Post.findOne({where: {id:req.params.id},
             include: [
             {
                 model:User,
@@ -89,10 +82,10 @@ router.get('/post/:id', async (req, res) => {
             }
             ],
         });
-        const posts = postData.map((post) => post.get({ plain: true}));
-        console.log("Post for Individual:", posts)
+         const post = postData.get({ plain: true});
+         console.log("postinfo", post);
     res.render('single-post', {
-        posts,
+        post,
         loggedIn: req.session.loggedIn
     });
     

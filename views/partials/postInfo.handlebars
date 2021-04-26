@@ -1,7 +1,9 @@
-    <div class="card-content">
-            {{post.words}}
+    <div class="card-content ">
+        <h1>{{post.title}}</h1>
+            <h3>{{post.words}}</h3>
             <div>
-                <b>{{user.username}}</b>
-                {{post.reated_at}}<a href="/post/{{post.id}}">{{comments.length}}</a>
+                <p>By: {{post.user.username}}</p>
+                <p>{{post.createdAt}}</p>
+                <a href="/posts/{{post.id}}">Add a Comment</a>
             </div>
     </div>
