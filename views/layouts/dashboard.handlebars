@@ -16,7 +16,7 @@
     <a href="/">Home</a>
     {{#if loggedIn}}
     <!-- If the user is logged in, show a logout button -->
-    <a href="/" id="logout">Logout</a>
+    <a href="/api/users/logout" id="logout">Logout</a>
     <a href="/dashboard" id="dashboard">Dashboard</a>
     {{else}}
     <!-- Otherwise, show a link to login -->
