@@ -5,8 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link  rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-{{{body}}}
+     <header>
+    <h1>Dashboard</h1>
+  </header>
+  <nav>
+    <a href="/">Home</a>
+    {{#if loggedIn}}
+    <!-- If the user is logged in, show a logout button -->
+    <a href="/" id="logout">Logout</a>
+    <a href="/dashboard" id="dashboard">Dashboard</a>
+    {{else}}
+    <!-- Otherwise, show a link to login -->
+    <a href="/login">Login</a>
+    {{/if}}
+  </nav>
+  <main>
+    <div>
+      {{{body}}}
+    </div>
+  </main>
+  {{#if loggedIn}}
+    <a href="/newPost"><button>New Post</button></a>
+  {{/if}}
+  <!-- If the user is logged in, load the JS script for when they logout -->
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
 </html>

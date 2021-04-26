@@ -41,7 +41,6 @@ router.get('/', async (req, res) => {
 
 
 router.get('/newPost', withAuth, (req,res) => {
-    console.log("req.session:", req.session);
     if(req.session.loggedIn){
       res.render('newPost',{
         loggedIn: true,

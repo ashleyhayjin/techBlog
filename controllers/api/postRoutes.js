@@ -12,11 +12,28 @@ router.post('/', async (req,res ) => {
       words: req.body.words,
       user_id: userData.id
     });
+    res.status(200).json(postData);
   } catch (err){
     res.status(400).json(err);
   }
 })
 
+router.put("/edit/:id", async (req,res) => {
+  try {
+    const postData = await Post.update({
+      title: req.body.title,
+      words: req.body.words
+    },
+    {
+      where:{
+        id: req.params.id
+      }
+    }) 
+    res.status(200).json(postData);
+  } catch (err){
+    console.log(err);
+  }
+})
 
 router.get('/', async (req, res) => {
   try { 

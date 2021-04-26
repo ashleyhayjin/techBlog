@@ -46,8 +46,42 @@ router.get('/',  async (req,res) => {
 });
 
 
+router.get("/edit/:id", async (req,res) => {
+   try{ 
+       const postData = await Post.findOne({where: {id : req.params.id}, 
+        attributes: [
+        'id',
+        'title',
+        'created_at',
+        'words',
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_words', 'user_id', 'post_id','created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username'],
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            } 
+        ],
+       });
+       console.log("data:", postData);
+       const posts = postData.map((post) => post.get({ plain: true}));
+       res.render('edit-post', {
+           layout : "dashboard",
+           posts,
+           loggedIn: true,
+       }); 
 
-
+    } catch(err){
+        res.status(500).json(err)
+    }
+});
 
 
 

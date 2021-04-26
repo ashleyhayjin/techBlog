@@ -1,13 +1,18 @@
     {{#each posts as |post|}}
 
-   <div post-id="{{post.id}}" class="card-content">
-            {{post.words}}
+     <div class="card-content ">
+        <h1>{{post.title}}</h1>
+            <h3>{{post.words}}</h3>
             <div>
-                <b>{{user.username}}</b>
-                <p>{{post.created_at}}</p> <a href="/post/{{post.id}}">{{comments.length}}</a>
+                <p>By: {{post.user.username}}</p>
+                <p>{{post.createdAt}}</p>
+                <a href="/dashboard/edit/{{post.id}}">Edit</a>
+                <a href="/posts/delete">Delete</a>
+             
+            </div>
     </div>
-{{/each}}   
-{{#if loggedIn}}
+    {{/each}}   
+{{!-- {{#if loggedIn}}
 <form id="comment-form">
 
     <textarea id="comment-form-body"name="comment-body"></textarea>
@@ -21,4 +26,4 @@
 
 {{#if loggedIn}}
 <script src="/js/comment.js"></script>
-{{/if}}
+{{/if}} --}}
