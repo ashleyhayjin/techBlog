@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
+        // console.log("session", session);
         const postData = await Post.findAll({
             attributes: [
                 'title',
@@ -27,7 +28,8 @@ router.get('/', async (req, res) => {
             ],
         });
         const posts = postData.map((post) => post.get({ plain: true}));
-        console.log("Posts for Homepage:" ,posts)
+        console.log("Posts for Homepage:" ,posts);
+
     res.render('homepage', {
         posts,
         loggedIn: req.session.loggedIn
@@ -46,6 +48,8 @@ router.get('/newPost', withAuth, (req,res) => {
         loggedIn: true,
         username: req.session.username
       });
+      console.log("session", req.session);
+
     }
 });
 

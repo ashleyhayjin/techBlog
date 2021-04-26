@@ -1,8 +1,10 @@
 const newPostHandler = async (event) => {
+    event.preventDefault();
 
     const title = document.querySelector("#post-title").value.trim();
     const words = document.querySelector("#post-content").value.trim();
-
+    console.log(title);
+    console.log(words);
     if (title && words){
         const response = await fetch('/api/posts', {
             method: 'POST',
@@ -10,13 +12,12 @@ const newPostHandler = async (event) => {
             headers: { 'Content-Type' : 'application/json'},
         });
         if (response.ok){
-            document.location.replace('/');
+            document.location.replace('/dashboard');
         }
         else {
             alert('error!')
         }
     }
-
 };
 
 document
