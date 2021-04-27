@@ -22,7 +22,7 @@ Techblog was created to allow users to make a sign up, login, create a post, com
 A user would use this application for pure bliss.
 
 ## Technologies
-I used node.js, express.js, Handlebars, MySql2, Sequelize, bcrypt, connect-session, dotenv, and Heroku.
+I used node.js, express.js, Handlebars, MySql2, Sequelize, bcrypt, connect-session, dotenv, JAWSDB, and Heroku.
 
 ## Licenses
 
